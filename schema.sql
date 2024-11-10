@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS task (
+	id INTEGER PRIMARY KEY,
+	name TEXT NOT NULL,
+	complete_by TEXT,
+	completed INTEGER
+)
