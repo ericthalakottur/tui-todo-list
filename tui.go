@@ -9,6 +9,7 @@ import (
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
+	"github.com/ericthalakottur/tui-todo-list/utils"
 )
 
 const (
@@ -76,14 +77,14 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "ctrl+c":
 			return m, tea.Quit
 		case "left":
-			m.windowIndex, _ = modulus(m.windowIndex-1, NUMBER_OF_WINDOWS)
+			m.windowIndex, _ = utils.Modulus(m.windowIndex-1, NUMBER_OF_WINDOWS)
 			if m.windowIndex == 1 {
 				m.taskListWindow.table.Focus()
 			} else {
 				m.taskListWindow.table.Blur()
 			}
 		case "right":
-			m.windowIndex, _ = modulus(m.windowIndex+1, NUMBER_OF_WINDOWS)
+			m.windowIndex, _ = utils.Modulus(m.windowIndex+1, NUMBER_OF_WINDOWS)
 			if m.windowIndex == 1 {
 				m.taskListWindow.table.Focus()
 			} else {
@@ -97,7 +98,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			switch m.windowIndex {
 			case 0:
 				currentWindow := &m.newTaskWindow
-				currentWindow.currentIndex, _ = modulus(currentWindow.currentIndex+shift, len(currentWindow.inputs))
+				currentWindow.currentIndex, _ = utils.Modulus(currentWindow.currentIndex+shift, len(currentWindow.inputs))
 				for i := range currentWindow.inputs {
 					currentWindow.inputs[i].Blur()
 				}

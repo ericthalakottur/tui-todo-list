@@ -16,3 +16,7 @@ build: tidy sqlc
 .PHONY: run
 run: tidy sqlc
 	go run .
+
+.PHONY: test
+test:
+	go test ./...
